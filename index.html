@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="smile.png" type="image/png">
+    <title>Менеджер задач | TaskTracker</title>
+</head>
+<body>
+    <main id="app">
+        <h1 class="main__title">Список дел</h1>
+        <form id="taskForm" method="POST" v-on:submit="addNewTask">
+            <input 
+                id="inputTask" 
+                type="text" 
+                placeholder="Например: Покушать" 
+                v-bind:value="inputTask"
+                v-on:input="changeInputValue"
+            >
+            <button id="addButton" type="submit">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="8.5" width="3" height="20" rx="1.5" fill="blueviolet"/>
+                    <rect y="8" width="20" height="3" rx="1.5" fill="blueviolet"/>
+                </svg>                
+            </button>
+        </form>
+        <ul class="tasks">
+            <template id="template-task" v-for="(task, index) in tasks">
+                <li class="task" v-bind:class="{completed: task.completed}">
+                    <h3 class="task__title">{{task.title}}</h3>
+                    <ul class="task__buttons">
+                        <li><button class="complete__button" v-on:click="completeTask(index, $event)">
+                            <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="17" height="19" fill="none"/>
+                                <path d="M2 11.5333C5.03333 14.1333 6.76667 17.1667 6.76667 17.1667C6.76667 17.1667 9.8 8.93333 15 2" stroke="#16B48D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>                            
+                        </button></li>
+                        <li><button class="delete__button" v-on:click="deleteTask(index, $event)">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="2.81048" height="19.6734" rx="1.40524" transform="matrix(0.711623 -0.702562 0.711623 0.702562 0 1.99216)" fill="#F34848"/>
+                                <rect width="19.6679" height="2.81126" rx="1.40563" transform="matrix(0.699251 -0.714876 0.723772 0.690039 0 14.0601)" fill="#F34848"/>
+                            </svg>                                                  
+                        </button></li>
+                    </ul>
+                </li>    
+            </template>
+        </ul>
+    </main>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="script.js"></script>
+</body>
+</html>
