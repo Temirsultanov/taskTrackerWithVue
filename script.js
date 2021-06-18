@@ -42,9 +42,6 @@ const app = {
             this.tasks.splice(index, 1);
             localStorage.setItem("tasks", JSON.stringify(this.tasks))
         },
-        changeInputValue (evt) {
-            this.inputTask = evt.target.value;
-        }
     },
 }
 Vue.createApp(app).mount("#app");
